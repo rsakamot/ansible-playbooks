@@ -1,0 +1,12 @@
+# sample
+#WSGIScriptAlias / /var/www/html/sampleapp/sampleapp/wsgi.py
+
+#WSGIPythonPath /var/www/html/sampleapp:/opt/python-2.7.8/lib/python2.7/site-packages
+#Alias /static/ /var/www/html/sampleapp/static
+
+#<Directory "/var/www/html/sampleapp/sampleapp">
+#    <Files wsgi.py>
+#          Order deny,allow
+#          Allow from all
+#    </Files>
+#</Directory>

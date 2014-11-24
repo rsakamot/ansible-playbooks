@@ -1,0 +1,29 @@
+- name: check user (present or absent)
+  user:
+    name="{{ item.name }}"
+    uid="{{ item.uid }}"
+    group="{{ item.group }}"
+    groups="{{ item.groups }}"
+    home="{{ item.home }}"
+    password="{{ item.passwd }}"
+    update_password="on_create"
+    state="{{ item.state }}"
+  register: user_add
+  with_items: users
+  tags:
+    - users
+
+- name: echo user_add
+  debug: var=user_add
+  tags:
+    - users
+
+- name: check absent user homedir
+  file:
+    path="{{ item.item.home }}"
+    state="absent"
+  when: item.changed == true and item.item.state == "absent"
+  with_items: user_add.results
+  tags:
+    - users
+

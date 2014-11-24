@@ -1,0 +1,22 @@
+---
+- name: websv setup
+  hosts: websv
+  remote_user: vagrant
+  sudo: yes
+  vars_files:
+    - ../roles/common/vars/vars.yml
+    - ../roles/users/vars/group_vars.yml
+    - ../roles/users/vars/users_vars.yml
+    - ../roles/sudoers/vars/vars.yml
+    - ../roles/yum/vars/vars.yml
+    - ../roles/python/vars/vars.yml
+    - ../roles/httpd/vars/vars.yml
+    - ../roles/mod_wsgi/vars/vars.yml
+  roles:
+    - ../roles/users
+    - ../roles/sudoers
+    - ../roles/yum
+    - ../roles/python
+    - ../roles/httpd
+    - ../roles/mod_wsgi
+    - ../roles/reboot

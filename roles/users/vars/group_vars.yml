@@ -1,0 +1,8 @@
+group:
+  - { name: "base_group",
+      gid: "800"}
+  - { name: "admin",
+      gid: "801" }
+  - { name: "user",
+      gid : "802" }
+

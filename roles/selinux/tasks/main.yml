@@ -1,0 +1,10 @@
+- name: copy selinux config file
+  copy:
+    src="{{ selinux_config_src_file }}"
+    dest="{{ selinux_config_dst_file }}"
+    owner="root"
+    group="root"
+    mode="644"
+  tags:
+    - selinux
+

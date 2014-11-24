@@ -1,0 +1,34 @@
+- name: add epel repos
+  yum:
+    name="http://ftp.riken.jp/Linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+    state=present
+  tags:
+    - yum
+
+- name: yum clean all
+  shell: "yum clean all"
+  tags:
+    - yum
+
+- name: install Development Tools
+  yum:
+    name="@Development tools"
+    state=present
+  tags:
+    - yum
+
+#- name: install Development Tools
+#    "yum groupinstall \"Development Tools\" -x git -y"
+#  tags:
+#    - yum
+
+- name: install rpm files
+  yum: name="{{ item }}" state=present
+  with_items: rpm_files_vars
+  tags:
+    - yum
+
+- name: bash update
+  yum: name="bash" state=latest
+  tags:
+    - yum

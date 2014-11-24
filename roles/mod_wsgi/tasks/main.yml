@@ -1,0 +1,64 @@
+- name: create "{{ mod_wsgi_dir_src }}"
+  file:
+    path="{{ mod_wsgi_dir_src }}"
+    state=directory
+  tags:
+    - mod_wsgi
+
+- name: get mod_wsgi
+  get_url:
+    dest="/tmp/mod_wsgi-4.2.8.tar.gz"
+    url="https://github.com/GrahamDumpleton/mod_wsgi/archive/4.2.8.tar.gz"
+  tags:
+    - mod_wsgi
+
+- name: unarchive mod_wsgi source files
+  unarchive:
+    creates="{{ mod_wsgi_dir_src }}/mod_wsgi-4.2.8"
+    src="/tmp/mod_wsgi-4.2.8.tar.gz"
+    dest="{{ mod_wsgi_dir_src }}"
+    copy=no
+  tags:
+    - mod_wsgi
+
+- name: configure files
+  shell:
+    chdir="{{ mod_wsgi_dir_src }}/mod_wsgi-4.2.8"
+    creates="/etc/httpd/modules/mod_wsgi.so"
+    ./configure --with-python=/opt/python-2.7.8/bin/python2.7
+  tags:
+    - mod_wsgi
+
+- name: make && make install
+  shell:
+    chdir="{{ mod_wsgi_dir_src }}/mod_wsgi-4.2.8"
+    creates="/etc/httpd/modules/mod_wsgi.so"
+    make && make install
+  tags:
+    - mod_wsgi
+
+- name: copy wsgi.conf
+  copy:
+    src="{{ mod_wsgi_config_file_src }}"
+    dest="{{ mod_wsgi_config_file_dst }}"
+    owner="root"
+    group="root"
+    mode="644"
+  tags:
+    - mod_wsgi
+
+- name: copy wsgi_site.conf
+  copy:
+    src="{{ mod_wsgi_site_config_file_src }}"
+    dest="{{ mod_wsgi_site_config_file_dst }}"
+    owner="apache"
+    group="apache"
+    mode="664"
+  tags:
+    - mod_wsgi
+
+- name: restart httpd
+  service: name="httpd" state="restarted"
+  tags:
+    - mod_wsgi
+

@@ -1,0 +1,2 @@
+selinux_config_src_file: "../../../../resource/server/common/etc/selinux/config"
+selinux_config_dst_file: "/etc/selinux/config"

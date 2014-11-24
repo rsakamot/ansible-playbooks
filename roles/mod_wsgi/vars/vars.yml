@@ -1,0 +1,6 @@
+mod_wsgi_dir_src: "{{ common_app_base_dir }}/mod_wsgi"
+mod_wsgi_config_file_src: "../../../resource/server/common/etc/httpd/conf.d/wsgi.conf"
+mod_wsgi_site_config_file_src: "../../../resource/server/common/etc/httpd/conf.d/wsgi_site.conf"
+mod_wsgi_config_file_dst: "/etc/httpd/conf.d/wsgi.conf"
+mod_wsgi_site_config_file_dst: "/etc/httpd/conf.d/wsgi_site.conf"
+

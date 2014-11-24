@@ -1,0 +1,15 @@
+users:
+- {name: ryo_user,
+   uid: '10000',
+   home: /home/ryo_user,
+   group: base_group,
+   groups: user,
+   passwd: '$6$rounds=100000$0tPrpjXqzj/4fMt7$ha73fP0ChovXoeO4MGf.UBLuX0RYEmn9fvuVACtA4sClZw7ePss/GWM0nLafhHgBZsPUuHu78Kx.6uaVa4ppI.',
+   state: present }
+- {name: ryo_admin,
+   uid: '10001',
+   home: /home/ryo_admin,
+   group: base_group,
+   groups: admin,
+   passwd: '$6$rounds=100000$ROsP2RU2MkCAVVvn$mM5wtX6Kf8KMLSdLCxkfbf1slX5ks4FdhuWAFHkvbmBdAI4lr7ZYoG4t3VGvK2f5SmhqMbltxWTpHS6fAuAYv1',
+   state: present }

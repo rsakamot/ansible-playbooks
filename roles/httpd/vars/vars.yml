@@ -1,0 +1,2 @@
+httpd_config_file_src: "../../../resource/server/common/etc/httpd/conf/httpd.conf"
+httpd_config_file_dst: "/etc/httpd/conf/httpd.conf"

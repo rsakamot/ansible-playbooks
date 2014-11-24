@@ -1,0 +1,69 @@
+- name: install Dependency Packages
+  yum:
+    name={{ item }}
+    state=present
+  with_items:
+    - "zlib-devel"
+    - "bzip2-devel"
+    - "openssl-devel"
+    - "ncurses-devel"
+    - "sqlite-devel"
+    - "readline-devel"
+    - "tk-devel"
+    - "gdbm-devel"
+    - "db4-devel"
+    - "libpcap-devel"
+    - "xz-devel"
+    - "mysql-devel"
+  tags:
+    - python
+
+- name: get python source
+  get_url:
+    url="{{ python_source_url }}"
+    dest="/tmp"
+
+- name: unarchive python source files
+  unarchive:
+    creates="{{ python_dir }}/Python-2.7.8"
+    src="/tmp/Python-2.7.8.tar.xz"
+    dest="/tmp"
+    copy=no
+  tags:
+    - python
+
+- name: configure files
+  shell: |
+    cd /tmp/Python-2.7.8 && ./configure --enable-unicode=ucs4 --enable-shared --prefix={{ python_dir }}
+  tags:
+    - python
+
+- name: make && make altinstall
+  shell: |
+    creates="{{ python_dir }}/bin"
+    cd /tmp/Python-2.7.8 &&
+    make && make altinstall
+  tags:
+    - python
+
+- name: copy ldconfig file
+  copy:
+    src="{{ python_ld_config_file_src }}"
+    dest="{{ python_ld_config_file_dst }}"
+    owner="root"
+    group="root"
+    mode="444"
+  tags:
+    - python
+
+- name: ldconfig
+  shell:
+    "/sbin/ldconfig"
+  tags:
+    - python
+
+- name: python test
+  shell: "{{ python_dir }}/bin/python2.7 -V"
+  tags:
+    - python
+

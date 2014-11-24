@@ -1,0 +1,2 @@
+sudoers_src_file: "../../../resource/server/common/etc/sudoers"
+sudoers_dst_file: "/etc/sudoers"

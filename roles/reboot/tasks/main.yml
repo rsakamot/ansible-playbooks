@@ -1,0 +1,5 @@
+- name: reboot system
+  shell:
+    sleep 20 && shutdown -r now
+  tags:
+    - reboot

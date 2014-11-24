@@ -1,0 +1,6 @@
+python_version: "python-2.7.8"
+python_dir: "{{ common_app_base_dir }}/{{ python_version }}"
+python_ld_config_file_src: "../../../resource/server/common/etc/ld.so.conf.d/python27-x86_64.conf"
+python_ld_config_file_dst: "/etc/ld.so.conf.d/python27-x86_64.conf"
+python_source_url: "https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tar.xz"
+

@@ -1,0 +1,10 @@
+- name: copy sudoers file
+  copy:
+    src="{{ sudoers_src_file }}"
+    dest="{{ sudoers_dst_file }}"
+    owner="root"
+    group="root"
+    mode="440"
+    validate="visudo -cf %s"
+  tags:
+    - sudoers
