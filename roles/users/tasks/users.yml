@@ -18,6 +18,14 @@
   tags:
     - users
 
+- name: passwd setting
+  shell:
+    "chage -d 0 -M 180 {{ item.item.name }}"
+  when: item.createhome is defined and item.createhome == true
+  with_items: user_add.results
+  tags:
+    - users
+
 - name: check absent user homedir
   file:
     path="{{ item.item.home }}"
@@ -26,4 +34,3 @@
   with_items: user_add.results
   tags:
     - users
-
